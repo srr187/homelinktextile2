@@ -341,104 +341,98 @@ header {
 }
 
 /* Premium Catalog Grid */
-.catalog-grid {
+/* =========================================
+   CATALOG TEASER (INDEX PAGE)
+   ========================================= */
+
+.catalog-teaser {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+}
+
+.teaser-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-top: 40px;
-}
-
-.catalog-item {
-  position: relative;
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  aspect-ratio: 3/4;
-  background: var(--bg);
-  border: 1px solid var(--border);
-}
-
-.catalog-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.7s ease;
-}
-
-.catalog-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(26, 66, 148, 0.95) 0%, rgba(26, 66, 148, 0.3) 100%);
-  color: var(--white);
-  opacity: 0;
-  display: flex;
-  align-items: flex-end;
-  padding: 32px 24px;
-  transition: opacity 0.4s ease;
-}
-
-.catalog-item:hover .catalog-overlay {
-  opacity: 1;
-}
-
-.catalog-item:hover .catalog-img {
-  transform: scale(1.05);
-}
-
-.catalog-content {
-  transform: translateY(15px);
-  transition: transform 0.4s ease;
-  width: 100%;
-}
-
-.catalog-item:hover .catalog-content {
-  transform: translateY(0);
-}
-
-.catalog-tag {
-  background: var(--secondary);
-  color: var(--white);
-  padding: 4px 10px;
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border-radius: 4px;
-  margin-bottom: 12px;
-  display: inline-block;
-}
-
-.catalog-content h3 {
-  font-size: 24px;
-  color: var(--white);
-  margin-bottom: 6px;
-}
-
-.catalog-content p {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 14px;
-  margin-bottom: 16px;
-}
-
-.catalog-content ul {
-  list-style: none;
-  margin-bottom: 24px;
-  padding: 0;
-}
-
-.catalog-content ul li {
-  font-size: 13px;
-  color: var(--white);
-  margin-bottom: 8px;
-  display: flex;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 80px;
   align-items: center;
 }
 
-.catalog-content ul li::before {
-  content: "→";
-  color: var(--secondary);
-  margin-right: 10px;
+.teaser-content h2 {
+  color: var(--primary-dark);
+  margin-bottom: 16px;
+}
+
+.teaser-content p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.teaser-image-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* Container for the slideshow */
+.teaser-slideshow {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+
+/* Base style for all images in the slideshow */
+.teaser-slideshow .slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1);
+  /* Smooth 1.5s crossfade, and a 6s slow zoom */
+  transition: opacity 1.5s ease-in-out, transform 6s ease-out;
+}
+
+/* The active image fades in and slowly zooms */
+.teaser-slideshow .slide.active {
+  opacity: 1;
+  transform: scale(1.08); /* Premium slow zoom effect */
+}
+
+.teaser-floating-card {
+  position: absolute;
+  bottom: -24px;
+  left: -32px;
+  background: var(--white);
+  padding: 24px 32px;
+  border-radius: var(--radius);
+  box-shadow: 0 24px 48px rgba(26, 66, 148, 0.15);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 2;
+}
+
+.teaser-floating-card strong {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
   font-weight: 700;
+  color: var(--secondary);
+  line-height: 1;
+}
+
+.teaser-floating-card span {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .btn-outline {
@@ -668,150 +662,6 @@ footer p, footer a {
   transform: scale(1.05);
 }
 
-/* Responsive Rules */
-@media (max-width: 1080px) {
-  .hero-grid,
-  .about-grid,
-  .quality-grid,
-  .contact-grid,
-  .cta-grid,
-  .process-grid,
-  .highlight-bar,
-  .feature-grid { /* Added feature-grid here */
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-  
-  /* Forces the image to always be on top on mobile screens */
-  .feature-grid.reverse .feature-text {
-    order: 0;
-  }
-
-  .nav {
-    flex-direction: column;
-    padding: 16px 0;
-  }
-}
-@media (max-width: 860px) {
-  .nav {
-    min-height: 76px;
-    flex-direction: row;
-  }
-
-  .nav-toggle {
-    display: inline-flex;
-  }
-
-  .site-nav {
-    position: absolute;
-    top: calc(100% + 10px);
-    left: 0;
-    right: 0;
-    display: none;
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 16px;
-  }
-
-  .site-nav.open {
-    display: block;
-  }
-
-  .site-nav ul {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-  }
-
-  .site-nav a {
-    display: block;
-    padding: 12px 16px;
-    border-radius: var(--radius);
-    background: var(--bg);
-  }
-
-  /* Catalog Swipeable Gallery for Mobile */
-  .catalog-grid {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 24px;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    gap: 16px;
-  }
-
-  .catalog-item {
-    flex: 0 0 85%;
-    scroll-snap-align: start;
-    aspect-ratio: auto;
-    height: 420px;
-  }
-
-  /* Custom Scrollbar for horizontal gallery */
-  .catalog-grid::-webkit-scrollbar {
-    height: 6px;
-  }
-  
-  .catalog-grid::-webkit-scrollbar-thumb {
-    background: var(--primary);
-    border-radius: 10px;
-  }
-  
-  .catalog-grid::-webkit-scrollbar-track {
-    background: var(--border);
-    border-radius: 10px;
-  }
-
-  /* Ensure overlay is always visible on mobile since there is no hover */
-  .catalog-overlay {
-    opacity: 1;
-    background: linear-gradient(to top, rgba(26, 66, 148, 0.95) 0%, rgba(26, 66, 148, 0.5) 100%);
-  }
-
-  .catalog-content {
-    transform: translateY(0);
-  }
-}
-
-@media (max-width: 700px) {
-  .hero-grid,
-  .about-grid,
-  .quality-grid,
-  .contact-grid,
-  .cta-grid,
-  .process-grid,
-  .highlight-bar,
-  .hero-stats {
-    grid-template-columns: 1fr;
-  }
-
-  .section {
-    padding: 62px 0;
-  }
-
-  .panel {
-    padding: 24px;
-  }
-  
-  .catalog-item {
-    flex: 0 0 92%;
-  }
-  .footer-grid {
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    gap: 16px;
-  }
-
-  .footer-links {
-    justify-content: center;
-  }
-}
-
 /* =========================================
    PRODUCTS PAGE SPECIFIC STYLES
    ========================================= */
@@ -895,4 +745,111 @@ footer p, footer a {
   color: var(--secondary);
   font-weight: 900;
   font-size: 16px;
+}
+
+/* Responsive Rules */
+@media (max-width: 1080px) {
+  .hero-grid,
+  .about-grid,
+  .quality-grid,
+  .contact-grid,
+  .cta-grid,
+  .process-grid,
+  .highlight-bar,
+  .feature-grid,
+  .teaser-grid { /* Added teaser-grid here */
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  
+  /* Pulls the floating card inside the image boundary on mobile */
+  .teaser-floating-card {
+    bottom: 16px;
+    left: 16px;
+    padding: 16px 24px;
+  }
+  
+  .teaser-floating-card strong {
+    font-size: 28px;
+  }
+
+  /* ... the rest of your existing tablet/mobile CSS ... */
+}
+
+@media (max-width: 860px) {
+  .nav {
+    min-height: 76px;
+    flex-direction: row;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .site-nav {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    display: none;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 16px;
+  }
+
+  .site-nav.open {
+    display: block;
+  }
+
+  .site-nav ul {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .site-nav a {
+    display: block;
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    background: var(--bg);
+  }
+
+  
+}
+
+@media (max-width: 700px) {
+  .hero-grid,
+  .about-grid,
+  .quality-grid,
+  .contact-grid,
+  .cta-grid,
+  .process-grid,
+  .highlight-bar,
+  .hero-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding: 62px 0;
+  }
+
+  .panel {
+    padding: 24px;
+  }
+  
+  .catalog-item {
+    flex: 0 0 92%;
+  }
+  .footer-grid {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .footer-links {
+    justify-content: center;
+  }
 }
